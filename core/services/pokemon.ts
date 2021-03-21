@@ -7,7 +7,7 @@ class PokemonService {
     })
   }
 
-  public getPokemon(id: number) {
+  public getPokemon(id: number | string) {
     return axios.get<any>(`/pokemon/${id}`)
   }
 }

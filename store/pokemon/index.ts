@@ -7,7 +7,7 @@ export const store: IPokemonStore = {
   state: () => ({
     pokemons: [],
     pokemon: {
-      id: 0,
+      id: '',
       name: '',
       url: '',
       weight: 0,
@@ -29,6 +29,12 @@ export const store: IPokemonStore = {
         commit(PokemonMutations.SET_POKEMON, response.data)
       })
     },
+    GET_SEARCH_POKEMON: ({ commit }, id) => {
+      return pokemonService.getPokemon(id).then((response) => {
+        commit(PokemonMutations.RESET_POKEMONS)
+        commit(PokemonMutations.SET_POKEMONS, [response.data])
+      })
+    },
   },
   mutations: {
     SET_POKEMONS: (state, pokemons) => {
@@ -36,6 +42,9 @@ export const store: IPokemonStore = {
     },
     SET_POKEMON: (state, pokemon) => {
       state.pokemon = pokemon
+    },
+    RESET_POKEMONS: (state) => {
+      state.pokemons = []
     },
   },
 }

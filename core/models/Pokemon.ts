@@ -2,6 +2,7 @@
 export interface IPokemonGeneric {
   name: string
   url: string
+  id: string
 }
 
 export interface IPokemonSprites {
@@ -24,7 +25,6 @@ export interface IPokemonTypes {
 }
 
 export interface IPokemon extends IPokemonGeneric {
-  id: number
   height: number
   order: number
   weight: number
