@@ -4,17 +4,20 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { IPokemonGeneric } from '~/core/models/Pokemon'
 import { pokemonService } from '~/core/services/pokemon'
-
-@Component({})
+import { PokemonActions } from '~/store-types/pokemon'
+import { pokemonStoreModule } from '~/store/pokemon'
+@Component({
+  async fetch({ store }) {
+    await store.dispatch(`pokemon/${PokemonActions.GET_POKEMONS}`)
+  },
+})
 class IndexPage extends Vue {
-  created() {
-    pokemonService
-      .getPokemons({ limit: 10, offset: 0 })
-      .then(({ data }: any) => {
-        const { results } = data
-        console.log(results)
-      })
+  @pokemonStoreModule.State pokemons!: IPokemonGeneric
+
+  mounted() {
+    console.log(this.pokemons)
   }
 }
 

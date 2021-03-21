@@ -14,7 +14,7 @@ export default {
   css: ['element-ui/lib/theme-chalk/index.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['@/plugins/element-ui'],
+  plugins: ['@/plugins/element-ui', '@/plugins/axios'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -38,14 +38,10 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    proxy: true,
-    baseURL: 'http://localhost:3000',
-  },
-  proxy: {
-    '/api': {
-      target: 'https://pokeapi.co/api/v2/',
-      pathRewrite: {
-        '^/api': '',
+    proxy: {
+      '/': {
+        target: 'https://pokeapi.co/api/v2/',
+        changeOrigin: false,
       },
     },
   },
