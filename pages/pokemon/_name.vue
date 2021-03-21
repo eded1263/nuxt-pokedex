@@ -9,17 +9,17 @@ import { Vue, Component } from 'vue-property-decorator'
 import { PokemonActions } from '~/store-types/pokemon'
 import PokemonDescriber from '~/components/pokemon/PokemonDescriber.vue'
 @Component({
-  components: {PokemonDescriber},
-  head(){
+  components: { PokemonDescriber },
+  head() {
     return {
-      title: 'Pokémon Info'
+      title: 'Pokémon Info',
     }
   },
   async fetch({ store, params, error }) {
     return await store
       .dispatch(`pokemon/${PokemonActions.GET_POKEMON}`, params.name)
       .catch((_: any) => {
-        error(Error("Pokemon not found"))
+        error(Error('Pokemon not found'))
       })
   },
 })

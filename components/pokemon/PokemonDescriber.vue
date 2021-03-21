@@ -1,6 +1,8 @@
 <template>
   <div class="pokemon-describer">
-    <el-button round class="back" @click="goBack"><i class="el-icon-back"></i> Back</el-button>
+    <el-button round class="back" @click="goBack"
+      ><i class="el-icon-back"></i> Back</el-button
+    >
     <div class="sprites">
       <img :src="image" class="image" alt="Pokemon Image" />
       <el-switch
@@ -23,20 +25,20 @@
       </div>
       <div class="stats">
         <div
-          class="stat"
           v-for="(stat, index) in pokemon.stats"
           :key="`${id}-${index}`"
+          class="stat"
         >
           <span class="name">{{ stat.stat.name.replace('-', ' ') }}:</span>
           <span class="value">{{ stat.base_stat || 'None' }}</span>
         </div>
         <div class="stat">
           <span class="name">Height:</span>
-          <span class="value">{{ pokemon.height * 10}} cm</span>
+          <span class="value">{{ pokemon.height * 10 }} cm</span>
         </div>
         <div class="stat">
           <span class="name">Weight:</span>
-          <span class="value">{{ (pokemon.weight / 10) }} kg</span>
+          <span class="value">{{ pokemon.weight / 10 }} kg</span>
         </div>
       </div>
     </div>
@@ -45,9 +47,9 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import PokeType from './PokeType.vue'
 import { IPokemon } from '~/core/models/Pokemon'
 import { pokemonStoreModule } from '~/store/pokemon'
-import PokeType from './PokeType.vue'
 
 @Component({
   components: { PokeType },
@@ -62,7 +64,7 @@ class PokemonPage extends Vue {
       : this.pokemon.sprites.front_default
   }
 
-  goBack(){
+  goBack() {
     this.$router.push('/')
   }
 }
@@ -86,7 +88,7 @@ export default PokemonPage
     align-items: center;
   }
 
-  > .back{
+  > .back {
     position: absolute;
     top: 10px;
     left: 10px;
@@ -123,10 +125,10 @@ export default PokemonPage
       margin-top: 10px;
       > .stat {
         display: grid;
-        grid-template-columns: 1fr .7fr;
+        grid-template-columns: 1fr 0.7fr;
         gap: 5px;
         @media screen and (max-width: 500px) {
-          grid-template-columns: 1fr .5fr;
+          grid-template-columns: 1fr 0.5fr;
           gap: 0;
         }
         > .name {

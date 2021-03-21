@@ -9,11 +9,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
 class PokeType extends Vue {
-  @Prop({required: true}) type!: string
-
-  created(){
-    console.log(this.type)
-  }
+  @Prop({ required: true }) type!: string
 }
 
 export default PokeType

@@ -24,9 +24,9 @@ import PokemonBox from '~/components/home/PokemonBox.vue'
 import { IQueryParams } from '~/core/interfaces/QueryParams'
 
 @Component({
-  head(){
+  head() {
     return {
-      title: 'DilsoDex'
+      title: 'DilsoDex',
     }
   },
   async fetch({ store }) {
@@ -36,9 +36,10 @@ import { IQueryParams } from '~/core/interfaces/QueryParams'
   components: { PokemonBox },
 })
 class IndexPage extends Vue {
-  head(){
+  head() {
     return 'DilsoDex'
   }
+
   offset = 0
   limit = 20
   @pokemonStoreModule.State loading!: boolean

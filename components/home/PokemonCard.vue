@@ -32,12 +32,12 @@ class PokemonCard extends Vue {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.id}.png`
   }
 
-  goToPokemon(){
+  goToPokemon() {
     this.$router.push({
       name: 'pokemon-name',
       params: {
-        name: this.pokemon.name
-      }
+        name: this.pokemon.name,
+      },
     })
   }
 }
