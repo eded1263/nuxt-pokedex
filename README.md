@@ -1,20 +1,21 @@
 # nuxt-pokedex
+## A fanmade pokedex to learn more about NuxtJS
 
+Tecnologies used:
+- Vue
+- Nuxt
+- Typescript
+- Vuex module system
+- Vue class components and Vue property decorator
+- Infinite Scrolling
+- Scss
 ## Build Setup
 
 ```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
+# Bringing up the project
 $ yarn build
 $ yarn start
 
-# generate static project
-$ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

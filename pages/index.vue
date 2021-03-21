@@ -1,5 +1,11 @@
 <template>
-  <div class="main-page">
+  <div
+    v-infinite-scroll="loadMore"
+    class="main-page"
+    :infinite-scroll-disabled="loading"
+    infinite-scroll-distance="0"
+    :infinite-scroll-immediate-check="false"
+  >
     <div class="text">
       <span class="title"> DilsoDex </span>
       <span class="subtitle">
@@ -12,10 +18,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { IPokemonGeneric } from '~/core/models/Pokemon'
 import { PokemonActions } from '~/store-types/pokemon'
 import { pokemonStoreModule } from '~/store/pokemon'
 import PokemonBox from '~/components/home/PokemonBox.vue'
+import { IQueryParams } from '~/core/interfaces/QueryParams'
 
 @Component({
   async fetch({ store }) {
@@ -24,7 +30,19 @@ import PokemonBox from '~/components/home/PokemonBox.vue'
   components: { PokemonBox },
 })
 class IndexPage extends Vue {
-  @pokemonStoreModule.State pokemons!: IPokemonGeneric
+  offset = 0
+  limit = 20
+  @pokemonStoreModule.State loading!: boolean
+  @pokemonStoreModule.State total!: number
+  @pokemonStoreModule.Action(PokemonActions.GET_POKEMONS)
+  getPokemons!: (params?: IQueryParams) => Promise<any>
+
+  loadMore() {
+    if (this.offset < this.total) {
+      this.offset += 20
+      this.getPokemons({ offset: this.offset, limit: this.limit })
+    }
+  }
 }
 
 export default IndexPage
@@ -41,7 +59,7 @@ export default IndexPage
   flex-direction: column;
   padding-top: 50px;
   overflow-x: hidden;
-  min-height: 100vh;
+  height: 100vh;
   > .text {
     display: flex;
     flex-direction: column;

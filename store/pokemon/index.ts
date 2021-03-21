@@ -5,6 +5,8 @@ import { IPokemonStore, PokemonMutations } from '~/store-types/pokemon'
 
 export const store: IPokemonStore = {
   state: () => ({
+    loading: false,
+    total: 0,
     pokemons: [],
     pokemon: {
       id: '',
@@ -19,9 +21,12 @@ export const store: IPokemonStore = {
     },
   }),
   actions: {
-    GET_POKEMONS: ({ commit }) => {
-      return pokemonService.getPokemons().then((response) => {
+    GET_POKEMONS: ({ commit }, query) => {
+      commit(PokemonMutations.SET_LOADING, true)
+      return pokemonService.getPokemons(query).then((response) => {
+        commit(PokemonMutations.SET_TOTAL, response.data.count)
         commit(PokemonMutations.SET_POKEMONS, response.data.results)
+        commit(PokemonMutations.SET_LOADING, false)
       })
     },
     GET_POKEMON: ({ commit }, id) => {
@@ -32,6 +37,7 @@ export const store: IPokemonStore = {
     GET_SEARCH_POKEMON: ({ commit }, id) => {
       return pokemonService.getPokemon(id).then((response) => {
         commit(PokemonMutations.RESET_POKEMONS)
+        commit(PokemonMutations.SET_TOTAL, 1)
         commit(PokemonMutations.SET_POKEMONS, [response.data])
       })
     },
@@ -45,6 +51,12 @@ export const store: IPokemonStore = {
     },
     RESET_POKEMONS: (state) => {
       state.pokemons = []
+    },
+    SET_LOADING: (state, loading) => {
+      state.loading = loading
+    },
+    SET_TOTAL: (state, total) => {
+      state.total = total
     },
   },
 }

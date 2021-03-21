@@ -21,6 +21,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import PokemonGrid from './PokemonGrid.vue'
 import { PokemonActions, PokemonMutations } from '~/store-types/pokemon'
 import { pokemonStoreModule } from '~/store/pokemon'
+import { IQueryParams } from '~/core/interfaces/QueryParams'
 
 @Component({
   // eslint-disable-next-line no-undef
@@ -31,7 +32,7 @@ class PokemonBox extends Vue {
   getPokemon!: (name: string) => Promise<any>
 
   @pokemonStoreModule.Action(PokemonActions.GET_POKEMONS)
-  getPokemons!: () => Promise<any>
+  getPokemons!: (params?: IQueryParams) => Promise<any>
 
   @pokemonStoreModule.Mutation(PokemonMutations.RESET_POKEMONS)
   resetPokemons!: () => Promise<any>
