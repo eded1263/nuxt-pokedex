@@ -18,9 +18,9 @@ export interface IPokemonStats {
 }
 
 export interface IPokemonTypes {
-  slot: number
-  type: {
-    name: string
+  Slot: number
+  Type: {
+    Name: string
   }
 }
 
@@ -28,7 +28,7 @@ export interface IPokemon extends IPokemonGeneric {
   height: number
   order: number
   weight: number
-  spites: IPokemonSprites[]
+  sprites: IPokemonSprites
   stats: IPokemonStats[]
   types: IPokemonTypes[]
 }

@@ -1,5 +1,5 @@
 <template>
-  <div class="pokemon-card">
+  <div class="pokemon-card" @click="goToPokemon">
     <div class="image">
       <img :src="imageUrl" alt="Pokemon Sprite" />
     </div>
@@ -30,6 +30,15 @@ class PokemonCard extends Vue {
 
   get imageUrl() {
     return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${this.id}.png`
+  }
+
+  goToPokemon(){
+    this.$router.push({
+      name: 'pokemon-name',
+      params: {
+        name: this.pokemon.name
+      }
+    })
   }
 }
 

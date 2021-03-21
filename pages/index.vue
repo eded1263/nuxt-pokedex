@@ -18,18 +18,27 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { PokemonActions } from '~/store-types/pokemon'
+import { PokemonActions, PokemonMutations } from '~/store-types/pokemon'
 import { pokemonStoreModule } from '~/store/pokemon'
 import PokemonBox from '~/components/home/PokemonBox.vue'
 import { IQueryParams } from '~/core/interfaces/QueryParams'
 
 @Component({
+  head(){
+    return {
+      title: 'DilsoDex'
+    }
+  },
   async fetch({ store }) {
+    store.commit(`pokemon/${PokemonMutations.RESET_POKEMONS}`)
     return await store.dispatch(`pokemon/${PokemonActions.GET_POKEMONS}`)
   },
   components: { PokemonBox },
 })
 class IndexPage extends Vue {
+  head(){
+    return 'DilsoDex'
+  }
   offset = 0
   limit = 20
   @pokemonStoreModule.State loading!: boolean

@@ -15,7 +15,10 @@ export const store: IPokemonStore = {
       weight: 0,
       height: 0,
       order: 0,
-      spites: [],
+      sprites: {
+        front_default: '',
+        front_shiny: '',
+      },
       stats: [],
       types: [],
     },
